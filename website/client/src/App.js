@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
-
+import io from "socket.io-client";
+const socket = io.connect("http://localhost:5000");
+import Heartrate from './components/Heartrate/Heartrate';
+import Profile from './components/Profile/Profile';
+import Head from './components/Head';
 function App() {
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-    fetch("http://localhost:5000/message")
-      .then((res) => res.json())
-      .then((data) => setMessage(data.message));
-  }, []);
   return (
-    <div className="App">
-      
-       <input placeholder="message..."></input>
-       <button>send message</button>
-    </div>
-  );
+      <div>
+        <Head />
+      </div>
+  )
+  
 }
 
 export default App;

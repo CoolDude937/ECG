@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const {Server} = require('socket.io');
+const {Server} = require('socket.io')
 const http = require('http');
 const {ReadlineParser} = require('@serialport/parser-readline');
 
@@ -23,26 +23,21 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 app.use(cors());
 const server = http.createServer(app);
-const io = new Server (server, {
-  cors:{
-    origin: "https://localhost:3000",
-    methods:["GET"]
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods:["GET"],
   }
-}); //instance of socket io
+});
 
+let beat = 0;
+parser.on('data', (data) => {
+  beat = parseInt(data);
 
-
-//io.on("connection", (socket) => {
-//  console.log("node is listening to the port")
-//})
-
-//app.get("/message", (req, res) => {  
-//    res.json({ message: "here is a message again hiyu"});
-// });
-
-//parser.on('data', (data) => {
-//  io.emit('data', data);
-//})
+})
+app.get("/message", (req, res) => {  
+    res.json({ message: parseInt(beat)});
+});
 
 server.listen(PORT, () => console.log(`server has started on port ${PORT}`));
 
