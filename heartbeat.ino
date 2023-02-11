@@ -73,27 +73,28 @@ void loop() {
   // next pulse peak. Originally: 0.98
   max = max * 0.97;
 
-
-  if (index == 10)
-    index = 0;
-  if (averager >= 10)
-    averager = 10;
-  arr_bpm[index] = bpm;
-  for (int i = 0; i < 10; i++)
+  if(bpm != 0)
   {
-    avg_bpm += arr_bpm[i];
+    if (index == 10)
+      index = 0;
+    if (averager >= 10)
+      averager = 10;
+    arr_bpm[index] = bpm;
+    for (int i = 0; i < 10; i++)
+    {
+      avg_bpm += arr_bpm[i];
+    }
+    avg_bpm = avg_bpm / averager;
+    averager++;
+    index++;
   }
-  avg_bpm = avg_bpm / averager;
-  averager++;
-  index++;
   // Every 10 seconds extrapolate the pulse rate.
   if (millis() >= bpmMills + 10000) {
     Serial.println(avg_bpm * 6);
-		bpm = 0;
-		bpmMills = millis();
+    bpm = 0;
+    bpmMills = millis();
   }
   avg_bpm = 0;
-
   // Must delay here to give the value a chance to decay
   delay(period);
 }
