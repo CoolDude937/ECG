@@ -5,6 +5,7 @@ import numpy as np
 import flask 
 from flask import Flask,render_template,Response
 import cv2
+import requests
 
 face_classifier=cv2.CascadeClassifier("C:/Users/mckal/OpenFrameworks/of_v0.11.2_vs2017_release/apps/myApps/myResponsiveSketch/bin\data/haarcascade_frontalface_default.xml")
 classifier = load_model(r'C:\Users\mckal\OneDrive\Documents\GitHub\uottahack5\CV_display\Model_0.2_0.57.h5')
@@ -14,6 +15,9 @@ camera=cv2.VideoCapture(0)
 
 
 def generate_frames():
+    url = 'http://localhost:5000/emotions'
+    # Empty dict to store emotions
+    emotion_val = dict()
     while True:
         ret,frame=camera.read()
         labels=[]
@@ -31,15 +35,11 @@ def generate_frames():
                 roi=np.expand_dims(roi,axis=0)
 
                 preds=classifier.predict(roi)[0]
-                # Printing emotion???
-                #f1.write(preds)
-                print()
-                print()
-                for i in range(5):
-                    print(f'{class_labels[i]}: {preds[i]*100}%')
-
-                print()
-                print()
+                
+                # Request
+                for i in range(5): 
+                    emotion_val[class_labels[i]] = preds[i]
+                x = request.post(url, json = emotion_val)
                 
                 label=class_labels[preds.argmax()]
                 label_position=(x,y)
