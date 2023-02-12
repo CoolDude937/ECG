@@ -1,0 +1,27 @@
+.profile{
+    height: 100vh;
+    width: 25%;
+    display:flex;
+    padding: 0px 100px 0px 100px;
+    
+    flex-direction: column;
+    background: #2A2A2A;
+    img{
+        object-fit: cover;
+        overflow: hidden;
+        height: 500px;
+        width: 100%;
+        margin-top: 40px;
+  
+        border-radius: 15%;
+    }
+    h1{
+        font-size:45px;
+        margin: 0;
+        padding-left: 20px;
+        padding-top: 20px;
+        color: white;
+        font-family: 'Raleway', sans-serif;
+        margin:0;
+    }
+}
