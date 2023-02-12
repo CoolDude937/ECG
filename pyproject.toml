@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "uottahack5"
+version = "0.1.0"
+description = ""
+authors = []
+readme = "README.md"
+packages = [{include = "CV_display"}]
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.11"
+numpy = "1.21.5"
+keras = "^2.10.0"
+opencv-python = "^4.7.0.68"
+flask = "^2.2.2"
+tensorflow = "^2.10.0"
+
+
+[tool.poetry.group.dev.dependencies]
+jupyter = "^1.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
