@@ -1,5 +1,7 @@
 
 #include "Arduino.h"
+#include "stdlib.h"
+#include "stdio.h"
 
 //Using built in LED pin for demo
 #define ledPin 13
@@ -18,7 +20,8 @@ void setup() {
   // Inbuilt LED
   pinMode(ledPin, OUTPUT);
 
-  for (int j = 0; j < 10; j++) {
+  for (int j = 0; j < 10; j++) 
+  {
     arr_bpm[j] = 0;
   }
 
@@ -28,10 +31,10 @@ void setup() {
 void loop() {
 
   // to find value between current and old
-  static float oldValue = 500;
+  static float oldValue = 400;
 
   //trying to average the bpm each iteration
-  int averager = 1;
+  float averager = 1;
   int index;
 
   // Time recording for BPM (beats per minute)
@@ -41,7 +44,7 @@ void loop() {
 
   // to minimize bad input
   static unsigned long timeBetweenBeats = millis();
-  int minDelayBetweenBeats = 400;
+  int minDelayBetweenBeats = 700;
 
   // Read the sensor value (0 - 1023)
   int rawValue = analogRead((unsigned char)sensorPin);
@@ -54,12 +57,12 @@ void loop() {
   // if we find a new maximum value AND we haven't had a pulse lately
   if ((change >= max) && (millis() > timeBetweenBeats + minDelayBetweenBeats)) {
 
+  // Flash LED
+    digitalWrite(ledPin, 1);
+    tone(3, 2500, 50);
+
     // Reset max every time we find a new peak
     max = change;
-
-    // Flash LED
-    digitalWrite(ledPin, 1);
-    tone(3, 2000, 50);
 
     // Reset the heart beat time values
     timeBetweenBeats = millis();
@@ -88,9 +91,9 @@ void loop() {
     averager++;
     index++;
   }
-  // Every 10 seconds extrapolate the pulse rate.
-  if (millis() >= bpmMills + 10000) {
-    Serial.println(avg_bpm * 6);
+  // Every 4 seconds extrapolate the pulse rate.
+  if (millis() >= bpmMills + 4000) {
+    Serial.println(avg_bpm * 15);
     bpm = 0;
     bpmMills = millis();
   }
