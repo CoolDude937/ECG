@@ -15,7 +15,7 @@ camera=cv2.VideoCapture(0)
 
 
 def generate_frames():
-    url = 'http://localhost:5000/emotions'
+    url = 'http://localhost:5001/emotions'
     # Empty dict to store emotions
     emotion_val = dict()
     while True:
@@ -37,10 +37,11 @@ def generate_frames():
                 preds=classifier.predict(roi)[0]
                 
                 # Request
+ 
                 for i in range(5): 
-                    emotion_val[class_labels[i]] = preds[i]
-                x = request.post(url, json = emotion_val)
-                
+                    emotion_val[class_labels[i]] = str(preds[i])
+                requests.post(url, json = emotion_val)
+
                 label=class_labels[preds.argmax()]
                 label_position=(x,y)
                 cv2.putText(frame,label,label_position,cv2.FONT_HERSHEY_SIMPLEX,2,(0,255,0),3)
