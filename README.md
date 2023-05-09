@@ -1,5 +1,7 @@
 # Emotional Cardiography (ECG) 
 Created by Mark Do, Hasan Tahir, Andy Ma, Mckale Chung
+![image](https://github.com/CoolDude937/ECG/assets/71574223/f50ac9a1-8b60-4607-a1d6-6f17a4e25756)
+
 
 ## Inspiration
 The inspiration for ECG comes form the tremendous labor shortage Canada is currently having in the medical industry and the desire to make safety and security accessible to everyone whos staying in medical facilities.
