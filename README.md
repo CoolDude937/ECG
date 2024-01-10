@@ -8,7 +8,7 @@ The inspiration for ECG comes form the tremendous labor shortage Canada is curre
 ECG uses a ML model we trained and python OpenCV to be able to detect a humans emotions based of facial expressions. Then using a heart rate sensor hooked up to an Arduino to simulate a professional grade cardiac event monitor,  we take in a patients bpm using C++. Then it sends both pieces of data to a web application made in JavaScript in real time using various libraries and techniques. Finally, the web application made using react creates a friendly user interface for the doctor to be able to see the probability of the patients possible emotions, the bpm and a suggestions section which gives the doctor recommendations based off our data.
 
 ## How we built it
-First we created a sequential model using 8 convolutional layers based on the fer2013 data set obtained from Kaggle. [x](https://www.kaggle.com/datasets/msambare/fer2013)
+First we created a sequential model using 8 convolutional layers based on the fer2013 data set obtained from Kaggle. [fer2013](https://www.kaggle.com/datasets/msambare/fer2013)
 
 We chose a 90/10 split on the dataset, resulting in around 24,000 training images and 2400 validation images. Our model has 4 convolutional block followed by two 64 units dense layer, and finally a softmax output. The general architecture of our convolution network uses (3x3) convolutional kernel with ELU activation followed by a batch normalization layer. A block consists of two of these kernel-activation-batchnorm components, followed by dropout and max pooling. The model has 4.7 million parameters and was trained over 75 epochs, resulting in a validation accuracy of 75%. 
 
