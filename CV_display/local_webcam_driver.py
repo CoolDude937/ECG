@@ -5,7 +5,10 @@ import numpy as np
 import keras
 import tensorflow as tf
 
+# Face obj detection model 
 face_classifier=cv2.CascadeClassifier("CV_display\haarcascade_frontalface_default.xml")
+
+# Emotion model
 classifier = load_model(r"CV_display\02_resnet_4_7M_model.h5")
 class_labels=['Pain','Happy','Neutral','Sad','Surprise']
 
